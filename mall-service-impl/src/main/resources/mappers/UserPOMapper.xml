@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiangbo.mall.dao.UserPOMapper">
+    <resultMap id="BaseResultMap" type="com.jiangbo.mall.pojo.UserPO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="mobile" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="question" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="answer" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="status" javaType="java.lang.Integer" jdbcType="BIT"/>
+            <arg column="role" javaType="java.lang.Integer" jdbcType="BIT"/>
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, password, email, mobile, question, answer, status, role, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.jiangbo.mall.pojo.UserPO" useGeneratedKeys="true" keyProperty="id">
+    insert into mall_user (id, name, password, 
+      email, mobile, question, 
+      answer, status, role, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{role,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.jiangbo.mall.pojo.UserPO">
+        insert into mall_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="question != null">
+                question,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+                #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jiangbo.mall.pojo.UserPO">
+        update mall_user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+                question = #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="role != null">
+                role = #{role,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jiangbo.mall.pojo.UserPO">
+    update mall_user
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      role = #{role,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="updateStatusByPrimaryKey">
+    update mall_user
+    set
+    status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="selectListByCondition" parameterType="com.jiangbo.mall.pojo.UserPO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_user
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="question != null">
+                 question = #{question,jdbcType=VARCHAR}
+            </if>
+            <if test="answer != null">
+                 answer = #{answer,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                 status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="role != null">
+                 role = #{role,jdbcType=INTEGER}
+            </if>
+            <if test="createTime != null">
+                 create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                 update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+         order by create_time desc
+    </select>
+
+    <select id="selectByLoginNameAndPassword" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_user
+        where (name = #{loginName,jdbcType=VARCHAR} or email = #{loginName, jdbcType=VARCHAR} or email = #{loginName, jdbcType=VARCHAR}) and password = #{password,jdbcType=VARCHAR} and status != 3
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    count(1)
+    from mall_user
+    where name = #{loginName,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectByMobile" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        count(1)
+        from mall_user
+        where mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        count(1)
+        from mall_user
+        where name = #{email,jdbcType=VARCHAR}
+    </select>
+</mapper>

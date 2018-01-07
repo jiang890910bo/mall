@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://code.alibabatech.com/schema/dubbo
+         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+  <dubbo:application name="mall-service"/>
+  <!--使用zookeeper广播注册中心暴露服务地址-->
+  <dubbo:registry address="zookeeper://127.0.0.1:2181" protocol="zookeeper"/>
+  <!--用dubbo协议在20880端口暴露服务-->
+  <dubbo:protocol name="dubbo" port="20880" id="dubbo"/>
+
+
+  <!--timeout超时时间设置：
+      以timeout为例，显示了配置的查找（优先级）顺序，其它retries, loadbalance, actives等类似。
+    方法级优先，接口级次之，全局配置再次之。
+    如果级别一样，则消费方优先，提供方次之。
+    其中，服务提供方配置，通过URL经由注册中心传递给消费方。
+    建议由服务提供方设置超时，因为一个方法需要执行多长时间，服务提供方更清楚，如果一个消费方同时引用多个服务，就不需要关心每个服务的超时设置。
+  -->
+    <!--用户-->
+  <bean id="userService" class="com.jiangbo.mall.service.impl.UserServiceImpl" />
+  <dubbo:service interface="com.jiangbo.mall.service.UserService"  ref="userService" timeout="15000"/>
+
+  <!--商品目录-->
+  <bean id="categoryService" class="com.jiangbo.mall.service.impl.CategoryServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.CategoryService" ref="categoryService" timeout="15000"/>
+
+  <!--商品-->
+  <bean id="productService" class="com.jiangbo.mall.service.impl.ProductServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.ProductService" ref="productService" timeout="15000"/>
+
+  <!--图片-->
+  <bean id="imageService" class="com.jiangbo.mall.service.impl.ImageServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.ImageService" ref="imageService" timeout="15000"/>
+
+  <!--活动-->
+  <bean id="activityService" class="com.jiangbo.mall.service.impl.ActivityServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.ActivityService" ref="activityService" timeout="15000"/>
+  <bean id="activityProductRefService" class="com.jiangbo.mall.service.impl.ActivityProductRefServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.ActivityProductRefService" ref="activityProductRefService" timeout="15000"/>
+
+  <!--购物车-->
+  <bean id="cartService" class="com.jiangbo.mall.service.impl.CartServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.CartService" ref="cartService" timeout="15000"/>
+
+  <!--订单-->
+  <bean id="orderService" class="com.jiangbo.mall.service.impl.OrderServiceImpl" />
+  <dubbo:service interface="com.jiangbo.mall.service.OrderService" ref="orderService" timeout="15000"/>
+  <bean id="orderItemService" class="com.jiangbo.mall.service.impl.OrderItenServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.OrderItemService" ref="orderItemService" timeout="15000"/>
+
+  <!--支付-->
+  <bean id="payInfoService" class="com.jiangbo.mall.service.impl.PayInfoServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.PayInfoService" ref="payInfoService" timeout="15000"/>
+
+  <!--发货地址-->
+  <bean id="shippingService" class="com.jiangbo.mall.service.impl.ShippingServiceImpl"/>
+  <dubbo:service interface="com.jiangbo.mall.service.ShippingService" ref="shippingService" timeout="15000"/>
+
+</beans>

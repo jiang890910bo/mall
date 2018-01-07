@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiangbo.mall.dao.ImagePOMapper">
+  <resultMap id="BaseResultMap" type="com.jiangbo.mall.pojo.ImagePO">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="main_image_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sub_image_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, main_image_url, sub_image_url, status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_image
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_image
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiangbo.mall.pojo.ImagePO">
+    insert into mall_image (id, name, main_image_url, 
+      sub_image_url, status, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mainImageUrl,jdbcType=VARCHAR}, 
+      #{subImageUrl,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiangbo.mall.pojo.ImagePO">
+    insert into mall_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mainImageUrl != null">
+        main_image_url,
+      </if>
+      <if test="subImageUrl != null">
+        sub_image_url,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImageUrl != null">
+        #{mainImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="subImageUrl != null">
+        #{subImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiangbo.mall.pojo.ImagePO">
+    update mall_image
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImageUrl != null">
+        main_image_url = #{mainImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="subImageUrl != null">
+        sub_image_url = #{subImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiangbo.mall.pojo.ImagePO">
+    update mall_image
+    set name = #{name,jdbcType=VARCHAR},
+      main_image_url = #{mainImageUrl,jdbcType=VARCHAR},
+      sub_image_url = #{subImageUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByCondition" parameterType="com.jiangbo.mall.pojo.ImagePO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_image
+    where 1=1 and status != 3
+    <if test="name != null">
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="mainImageUrl != null">
+      and main_image_url = #{mainImageUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="subImageUrl != null">
+      and sub_image_url = #{subImageUrl,jdbcType=VARCHAR}
+    </if>
+
+    <if test="createTime != null">
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null">
+      and status = #{status,jdbcType=TINYINT}
+    </if>
+  </select>
+</mapper>

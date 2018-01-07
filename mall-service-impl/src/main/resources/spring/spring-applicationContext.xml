@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/cache
+    http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+       <!-- 自动扫描web包 ,将带有注解的类 纳入spring容器管理 -->
+       <context:component-scan base-package="com.jiangbo.mall.service"/>
+
+       <!-- 引入jdbc配置文件 -->
+       <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+              <property name="locations">
+                     <list>
+                         <value>classpath:db/jdbc.properties</value>
+                     </list>
+              </property>
+       </bean>
+
+       <!-- dataSource 配置 -->
+       <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+              <!-- 基本属性 url、user、password -->
+              <property name="url" value="${jdbc.url}" />
+              <property name="username" value="${jdbc.username}" />
+              <property name="password" value="${jdbc.password}" />
+
+              <!-- 配置初始化大小、最小、最大 -->
+              <property name="initialSize" value="1" />
+              <property name="minIdle" value="1" />
+              <property name="maxActive" value="20" />
+
+              <!-- 配置获取连接等待超时的时间 -->
+              <property name="maxWait" value="60000" />
+
+              <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+              <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+              <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+              <property name="minEvictableIdleTimeMillis" value="300000" />
+
+              <property name="validationQuery" value="SELECT 'x'" />
+              <property name="testWhileIdle" value="true" />
+              <property name="testOnBorrow" value="false" />
+              <property name="testOnReturn" value="false" />
+
+              <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+              <property name="poolPreparedStatements" value="false" />
+              <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+           <!-- ******重要的配置：监控统计拦截的filters,日志记录 *start* ******-->
+           <!-- 并在filters属性中配置了log4j，ref中的bean是下面拦截器的配置 -->
+           <!-- proxyFilters和filters是组合关系,前者是根据bean配置,后者根据别名配置的-->
+           <!-- stat是statfilter的别名,log4j是logFilter的别名-->
+           <!-- 监控统计拦截的filters,日志记录,这里开启了stat,wall（sql翻过墙过滤监控）,log4j（log4j的监控）配置 -->
+           <property name="proxyFilters">
+               <list>
+                   <ref bean="statfilter" />
+                   <ref bean="logFilter" />
+               </list>
+           </property>
+           <property name="filters" value="wall" />
+       </bean>
+
+    <!-- 慢SQL记录 *start* -->
+    <bean id="statfilter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <!-- 开启合并sql -->
+        <property name="mergeSql" value="true" />
+        <!-- 开启慢查询语句,1秒 -->
+        <property name="slowSqlMillis" value="1000" />
+        <property name="logSlowSql" value="true" />
+    </bean>
+
+    <bean id="logFilter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+        <!-- <property name="resultSetLogEnabled" value="false" /> -->
+        <!-- <property name="statementExecutableSqlLogEnable" value="true" /> -->
+    </bean>
+
+       <!-- mybatis文件配置，扫描所有mapper文件 -->
+       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource" p:configLocation="classpath:spring/mybatis-config.xml" p:mapperLocations="classpath*:mappers/*.xml" />
+
+       <!-- spring与mybatis整合配置，扫描指定基包下面的所有接口，并把它们注册为一个个MapperFactoryBean对象-->
+       <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.jiangbo.mall.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory" />
+
+       <!-- 对dataSource 数据源进行事务管理 -->
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource" />
+
+       <!-- 配置使Spring采用CGLIB代理 -->
+       <aop:aspectj-autoproxy proxy-target-class="true" />
+
+       <!-- 启用对事务注解的支持 -->
+       <tx:annotation-driven transaction-manager="transactionManager" />
+
+       <!-- Cache配置 -->
+       <!--<cache:annotation-driven cache-manager="cacheManager" />
+       <bean id="ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="classpath:spring/ehcache.xml" />
+       <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="ehCacheManagerFactory" />
+-->
+    <!--dubbo注册端-->
+    <!--<import resource="dubbo-provider.xml"/>-->
+</beans>

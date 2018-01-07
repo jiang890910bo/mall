@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>激情秒杀</title>
+<link href="css/1yms.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.countdown.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+jQuery(document).ready(function($){ 
+
+	$('div#countdown-timer1').countdown("2016/5/20" , function(event) {
+		var $this = $(this);
+		switch(event.type){
+			case "seconds":
+			case "minutes":
+			case "hours":
+			case "days":
+			case "weeks":
+			case "daysLeft":
+			$this.find('span#'+event.type).html(event.value);
+			break;
+			case "finished":
+			$this.hide();
+			break;
+		}
+		
+	});
+	
+		$('div#countdown-timer2').countdown("2016/6/29" , function(event) {
+		var $this = $(this);
+		switch(event.type){
+			case "seconds":
+			case "minutes":
+			case "hours":
+			case "days":
+			case "weeks":
+			case "daysLeft":
+			$this.find('span#'+event.type).html(event.value);
+			break;
+			case "finished":
+			$this.hide();
+			break;
+		}
+		
+	});
+	
+});
+</script>
+
+</head>
+
+<body>
+
+
+<div style="background:#f7f7f7 url(images/bak_ms.png); " class="back_1yms">
+<div class="title_1yms"></div>
+<div style="clear:both"></div>
+
+<div class="body_1yms">
+	<div class="ms_floor1">
+    	<div class="1yms_floor1_title"><img src="images/wenb1.png"></div>
+       	 <div style="clear:both; height:20px"></div>
+		
+        	<div class="ms_border">
+            <div class="floor1_left"><img src="images/guangg1.png"></div>
+            <div class="floor1_right">
+            	<div class="floor1_right_text">
+            		<div class="floor1_right_title">[可乐相伴 开怀畅饮]可口可乐500ml/瓶</div>
+                    <div class="floor1_right_news">缤纷时刻齐分享！可口可乐以其独特的风味和上佳的口感深受大众尤其是年轻人的青睐，与 美食是绝配哦！</div>
+                    <div class="floor1_time">
+                    	<div class="time_tb"><img src="images/time.png"></div>
+                        <div class="time_text">剩余：</div>
+                    	<div id="countdown-timer1">
+                            <div class="block"><span id="weeks"></span>周</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="daysLeft"></span>天</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="hours"></span>时</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="minutes"></span>分</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="seconds"></span>秒</div>
+                        </div>
+                        <div class="has"><img src="images/has.png"></div>
+                        <div class="red" style="font-weight:bold;">5867</div>
+                        <div class="te">瓶已抢</div>
+                    </div>
+                    <div style="clear:both; height:85px;"></div>
+                    <div class="floor1_three">
+                    	<div class="floor1_price"><div class="red floor1_three_fh">￥</div><div class="red floor1_three_size">1</div><div class="yh">￥3.00</div></div>
+                        <a href="#"><div  class="subnow">马上抢</div></a>
+                    </div>
+            	</div>
+            </div>
+            </div>
+            
+                   	 <div style="clear:both; height:20px"></div>
+         
+         
+         <div class="ms_border">
+            <div class="floor1_left"><img src="images/guangg2.png"></div>
+            <div class="floor1_right">
+            	<div class="floor1_right_text">
+            		<div class="floor1_right_title">[一面之交 终生难忘]陈克明 清汤挂面400g</div>
+                    <div class="floor1_right_news">精选优质中高筋小麦粉，采用多道压延和恒温蒸汽熟化技术，面条筋道爽滑，柔软易消化 ， 口感极佳！ </div>
+                    <div class="floor1_time">
+                    	<div class="time_tb"><img src="images/time.png"></div>
+                        <div class="time_text">离开团还剩：</div>
+                    	<div id="countdown-timer2">
+                            <div class="block"><span id="weeks"></span>周</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="daysLeft"></span>天</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="hours"></span>时</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="minutes"></span>分</div>
+                            <div class="space">&nbsp;</div>
+                            <div class="block"><span id="seconds"></span>秒</div>
+                        </div>
+                    </div>
+                    <div style="clear:both; height:85px;"></div>
+                    <div class="floor1_three">
+                    	<div class="floor1_price"><div class="red floor1_three_fh">￥</div><div class="red floor1_three_size">1</div><div class="yh">￥3.00</div></div>
+                        <a href="#"><div  class="subnow">马上抢</div></a>
+                    </div>
+            	</div>
+            </div>
+            </div>
+            <div style="clear:both"></div>
+            
+            
+            
+    </div>
+    
+    <div class="ms_floor2">
+     <div class="ms_floor2_title"><img src="images/wenb2.png"></div>
+     
+     <ul class="floo2_ul">
+     <!--第一行-->
+    	<li><a href="#">
+        	<div><img src="images/ms-_01.png"></div></a>
+            <div class="floor2_bottom_text">
+            		<div class="floor2_right_title">[细致入微的口腔呵护]高露洁草本牙膏</div>
+                    <div class="floor2_right_news">含有金银花，能除菌消炎，去火清热富含西瓜霜，有效预防口腔溃疡，萃取田七精华，减少牙龈出血 </div>
+                    <div style="clear:both; height:15px;"></div>
+                    <div class="floor2_three">
+                    	<div class="floor1_price"><div class="red floor1_three_fh">￥</div><div class="red floor1_three_size">1</div><div class="yh">￥3.00</div></div>
+                        <div class="floor2_right">
+                        	<div class="top">限量</div>
+                            <div class="bottom">500件</div>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+            	</div>
+        </li> 
+        <div class="center"></div>
+        <li>
+        <a href="#">
+        	<div><img src="images/ms_02.png"></div></a>
+            <div class="floor2_bottom_text">
+            		<div class="floor2_right_title">[三鲜标准 美味健康]太太乐鸡精调味料100g </div>
+                    <div class="floor2_right_news">严选新鲜原料，集鲜味、香味和营养于一体配方全新升级， 鲜美程度提高2倍 </div>
+                    <div style="clear:both; height:15px;"></div>
+                    <div class="floor2_three">
+                    	<div class="floor1_price"><div class="red floor1_three_fh">￥</div><div class="red floor1_three_size">1</div><div class="yh">￥3.00</div></div>
+                        <div class="floor2_right">
+                        	<div class="top">限量</div>
+                            <div class="bottom">500件</div>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+            	</div>
+        </li> 
+        <!--第一行-->
+        
+        <!--第二行-->
+        <li><a href="#">
+        	<div><img src="images/ms-_01.png"></div></a>
+            <div class="floor2_bottom_text">
+            		<div class="floor2_right_title">[细致入微的口腔呵护]高露洁草本牙膏</div>
+                    <div class="floor2_right_news">含有金银花，能除菌消炎，去火清热富含西瓜霜，有效预防口腔溃疡，萃取田七精华，减少牙龈出血 </div>
+                    <div style="clear:both; height:15px;"></div>
+                    <div class="floor2_three">
+                    	<div class="floor1_price"><div class="red floor1_three_fh">￥</div><div class="red floor1_three_size">1</div><div class="yh">￥3.00</div></div>
+                        <div class="floor2_right">
+                        	<div class="top">限量</div>
+                            <div class="bottom">500件</div>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+            	</div>
+        </li> 
+        <div class="center"></div>
+        <li>
+        <a href="#">
+        	<div><img src="images/ms_02.png"></div></a>
+            <div class="floor2_bottom_text">
+            		<div class="floor2_right_title">[三鲜标准 美味健康]太太乐鸡精调味料100g </div>
+                    <div class="floor2_right_news">严选新鲜原料，集鲜味、香味和营养于一体配方全新升级， 鲜美程度提高2倍 </div>
+                    <div style="clear:both; height:15px;"></div>
+                    <div class="floor2_three">
+                    	<div class="floor1_price"><div class="red floor1_three_fh">￥</div><div class="red floor1_three_size">1</div><div class="yh">￥3.00</div></div>
+                        <div class="floor2_right">
+                        	<div class="top">限量</div>
+                            <div class="bottom">500件</div>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+            	</div>
+        </li> 
+        <!--第二行-->
+     
+     	<div style="clear:both"></div>
+     </ul>
+    
+    </div>
+
+</div>
+</div>
+<div style="clear:both"></div>
+
+
+</body>
+</html>

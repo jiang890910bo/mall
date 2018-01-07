@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiangbo.mall.dao.ActivityPOMapper">
+  <resultMap id="BaseResultMap" type="com.jiangbo.mall.pojo.ActivityPO">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="start_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="activity_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name,start_time, end_time, activity_status, status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_activity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiangbo.mall.pojo.ActivityPO">
+    insert into mall_activity (id, name, start_time, end_time,
+      activity_status, status, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+      #{activityStatus,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiangbo.mall.pojo.ActivityPO">
+    insert into mall_activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="activityStatus != null">
+        activity_status,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityStatus != null">
+        #{activityStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiangbo.mall.pojo.ActivityPO">
+    update mall_activity
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityStatus != null">
+        activity_status = #{activityStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiangbo.mall.pojo.ActivityPO">
+    update mall_activity
+    set
+    name = #{name,jdbcType=VARCHAR},
+    start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      activity_status = #{activityStatus,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectListByCondition" parameterType="com.jiangbo.mall.pojo.ActivityPO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_activity
+    where 1=1 and status != 3
+    <if test="name != null">
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime != null">
+      and start_time = #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null">
+      and  end_time = #{endTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="activityStatus != null">
+      and  activity_status = #{activityStatus,jdbcType=TINYINT}
+    </if>
+    <if test="status != null">
+      and status = #{status,jdbcType=TINYINT}
+    </if>
+    <if test="createTime != null">
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+     order by create_time desc
+  </select>
+  <select id="queryByTime" resultType="java.lang.Integer" parameterType="java.util.Date">
+<!--这里不用<![CDATA[ ]]将出错：元素内容必须由格式正确的字符数据或标记组成。
+错误原因：mybatis查询的时候，需要用到运算符 小于号：< 和  大于号： >，在mybatis配置文件里面，这种会被认为是标签，所以解析错误-->
+    select count(1) from mall_activity where <![CDATA[ #{time,jdbcType=TIMESTAMP} < end_time]]>
+  </select>
+
+  <select id="selectCurrentActivity" resultMap="BaseResultMap">
+    select * from mall_activity where activity_status = 3 and unix_timestamp(NOW()) BETWEEN unix_timestamp(start_time) and unix_timestamp(end_time) ORDER BY id
+  </select>
+
+  <select id="selectLatestActivity" resultMap="BaseResultMap">
+    select * from mall_activity where DATE_FORMAT(start_time,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+    and activity_status = 3
+    <!--在mybatis映射文件中书写sql where语句经常会用到大于小于号，如果直接用大于小于号就会报错
+解决办法1：xml特殊字符可以适用转义字符代替
+解决办法2: 适用 <![CDATA[   ]]>节，将sql包括起来，在两者之间嵌入不想被解析程序解析的原始数据，解析器不对CDATA区中的内容进行解析，而是将这些数据原封不动地交给下游程序处理。-->
+    and UNIX_TIMESTAMP(NOW()) &lt; UNIX_TIMESTAMP(start_time) order by start_time limit 0, 1
+  </select>
+  <select id="hasCurrentActivity" resultType="java.lang.Integer">
+    select count(0) from mall_activity where activity_status = 3 and unix_timestamp(NOW()) BETWEEN unix_timestamp(start_time) and unix_timestamp(end_time)
+  </select>
+</mapper>

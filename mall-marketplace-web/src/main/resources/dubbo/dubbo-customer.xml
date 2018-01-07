@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://code.alibabatech.com/schema/dubbo
+         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="mall-marketplace-customer"/>
+
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" protocol="zookeeper"/>
+
+    <!--用户-->
+    <dubbo:reference interface="com.jiangbo.mall.service.UserService" id="userService" check="false"/>
+
+    <!--商品目录-->
+    <dubbo:reference interface="com.jiangbo.mall.service.CategoryService" id="categoryService" check="false"/>
+
+    <!--商品-->
+    <dubbo:reference interface="com.jiangbo.mall.service.ProductService" id="productService" check="false"/>
+
+    <!--图片-->
+    <dubbo:reference interface="com.jiangbo.mall.service.ImageService" id="imageService" check="false"/>
+
+    <!--活动-->
+    <dubbo:reference interface="com.jiangbo.mall.service.ActivityService" id="activityService" check="false"/>
+    <dubbo:reference interface="com.jiangbo.mall.service.ActivityProductRefService" id="activityProductRefService" check="false"/>
+
+    <!--购物车-->
+    <dubbo:reference interface="com.jiangbo.mall.service.CartService" id="cartService" check="false"/>
+
+    <!--订单-->
+    <dubbo:reference interface="com.jiangbo.mall.service.OrderService" id="orderService" check="false"/>
+    <dubbo:reference interface="com.jiangbo.mall.service.OrderItemService" id="orderItemService" check="false"/>
+
+    <!--支付-->
+    <dubbo:reference interface="com.jiangbo.mall.service.PayInfoService" id="payInfoService" check="false"/>
+
+    <!--发货地址-->
+    <dubbo:reference interface="com.jiangbo.mall.service.ShippingService" id="shippingService" check="false"/>
+</beans>
